@@ -12,6 +12,7 @@ public class CarController : MonoBehaviour {
 	float PacketLimit = 35.0f / 1000f;
 
 	public float Sensitivity = 1f;
+	public float MoveSpeed = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +21,7 @@ public class CarController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		UpdateInput ();
 	}
 
 	void UpdateInput(){
@@ -36,7 +37,7 @@ public class CarController : MonoBehaviour {
 			float yaw = UserInputControl.Horizontal ();
 			if (yaw != 0f) {
 
-				//Debug.Log (yaw);
+
 				// reminder - Euler(pitch , yaw , roll)
 				newBodyRotation = CharacterObject.transform.rotation.eulerAngles + new Vector3 (0f, yaw * Sensitivity * Time.deltaTime, 0f);
 
@@ -44,6 +45,14 @@ public class CarController : MonoBehaviour {
 
 				IsTransformDirty = true;
 			}
+
+			Vector3 newPosition = CharacterObject.transform.position;
+			CharacterObject.Rb.MovePosition (CharacterObject.Rb.position +
+				CharacterObject.transform.forward * MoveSpeed * Time.deltaTime);
+
+			newPosition = CharacterObject.transform.position;
+
+			IsTransformDirty = true;
 
 			// position //------------------------------------------------------------
 			/*
@@ -80,6 +89,8 @@ public class CarController : MonoBehaviour {
 			}*/
 
 			// network //------------------------------------------------------------
+
+			/*
 			PacketTimer += Time.deltaTime;
 			if (PacketTimer > PacketLimit && IsTransformDirty) {
 				Dictionary<string, string> data = new Dictionary<string, string> ();
@@ -89,7 +100,7 @@ public class CarController : MonoBehaviour {
 				SocketIOComp.Emit("SERVER:MOVE", new JSONObject(data));
 
 				PacketTimer = 0f;
-			}
+			}*/
 		}
 	}
 }

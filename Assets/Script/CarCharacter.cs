@@ -4,13 +4,47 @@ using UnityEngine;
 
 public class CarCharacter : MonoBehaviour {
 
+	public Rigidbody Rb;
+
+	Vector2 prevForward;
+	Vector2 currForward;
+	Vector2 currRight;
+
+	public float RotateAmount = 1f;
+
 	// Use this for initialization
 	void Start () {
-		
+		prevForward = new Vector2(transform.forward.x, transform.forward.z);
+		currForward = new Vector2(transform.forward.x, transform.forward.z);
+		currRight = new Vector2 (transform.right.x, transform.right.z);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		currForward.x = transform.forward.x;
+		currForward.y = transform.forward.z;
+		if (currForward != prevForward) {
+
+			// rotation amount
+			float dot = Vector2.Dot (currForward, prevForward);
+
+			// figure out right or left
+			currRight.x = transform.right.x;
+			currRight.y = transform.right.z;
+			float dot2 = Vector2.Dot (prevForward, currRight);
+
+			/*
+			if (dot2 > 0f)
+				Debug.Log ("Left");
+			else
+				Debug.Log ("Right");
+			Debug.Log (dot);*/
+
+			Vector3 newBodyRotation = transform.rotation.eulerAngles + new Vector3 (0f, 0f, dot2 * dot * RotateAmount);
+			transform.rotation = Quaternion.Euler (newBodyRotation);
+
+			prevForward = currForward;
+		}
 	}
 }

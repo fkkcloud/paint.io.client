@@ -35,6 +35,7 @@ public class UserControl : IOBehavior, IDragHandler, IPointerUpHandler, IPointer
 			float yDelta = (draggedPos.y - BaseScreenPosition.y) / InteractiveImg.rectTransform.sizeDelta.y; //pitch - normalized
 			inputVector = new Vector3 (xDelta, yDelta, 0f);
 			inputVector = (inputVector.magnitude > 1f) ? inputVector.normalized : inputVector;
+
 		}
 	}
 
@@ -48,7 +49,6 @@ public class UserControl : IOBehavior, IDragHandler, IPointerUpHandler, IPointer
 			, out pointerDownPos)) 
 		{
 			BaseScreenPosition = new Vector2(pointerDownPos.x, pointerDownPos.y);
-
 			IsEnableCameraRotation = true;
 		}
 	}
