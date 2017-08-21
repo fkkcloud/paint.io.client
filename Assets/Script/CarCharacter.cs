@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class CarCharacter : MonoBehaviour {
 
+	public string id;
+	public float latestElapsedTime;
+
+	public bool IsSimulated;
+
+	public Vector3 simulatedEndPos;
+	public Quaternion simulatedBodyEndRot;
+
 	public Rigidbody Rb;
 
 	Vector2 prevForward;
 	Vector2 currForward;
 	Vector2 currRight;
+
+	Vector3 Velocity;
+
+	public float positionSyncSpeed;
+	public float rotationSyncSpeed;
 
 	public float RotateAmount = 1f;
 
@@ -22,6 +35,14 @@ public class CarCharacter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (IsSimulated) {
+			Vector3 currPos = new Vector3(transform.position.x, 0f, transform.position.z);
+			transform.position = Vector3.SmoothDamp (currPos, simulatedEndPos, ref Velocity, positionSyncSpeed * Time.deltaTime);
+			transform.rotation = Quaternion.RotateTowards (transform.rotation, simulatedBodyEndRot, rotationSyncSpeed * Time.deltaTime);
+		}
+
+
+		// Animation of Car
 		currForward.x = transform.forward.x;
 		currForward.y = transform.forward.z;
 		if (currForward != prevForward) {

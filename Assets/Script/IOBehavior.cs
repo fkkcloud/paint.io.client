@@ -1,16 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SocketIO;
 
 public class IOBehavior : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	private SocketIOComponent _socketIO;
+	public SocketIOComponent SocketIOComp
+	{
+		get
+		{
+			if (_socketIO == null)
+				_socketIO = FindObjectOfType<SocketIOComponent> ();
+
+			return _socketIO;
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	private GameState _gameState;
+	public GameState GlobalGameState
+	{
+		get
+		{
+			if (_gameState == null)
+				_gameState = FindObjectOfType<GameState> ();
+
+			return _gameState;
+		}
 	}
+
 }
