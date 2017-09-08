@@ -55,13 +55,7 @@ public class CarCharacter : MonoBehaviour {
 			currRight.y = transform.right.z;
 			float dot2 = Vector2.Dot (prevForward, currRight);
 
-			/*
-			if (dot2 > 0f)
-				Debug.Log ("Left");
-			else
-				Debug.Log ("Right");
-			Debug.Log (dot);*/
-
+			
 			Vector3 newBodyRotation = transform.rotation.eulerAngles + new Vector3 (0f, 0f, dot2 * dot * RotateAmount);
 			transform.rotation = Quaternion.Euler (newBodyRotation);
 
