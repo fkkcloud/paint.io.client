@@ -1,0 +1,244 @@
+fileFormatVersion: 2
+guid: 87ac6a12b8998b64bbd02dede41ef9ef
+timeCreated: 1505883392
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Box430
+    100002: Box431
+    100004: Box432
+    100006: Box433
+    100008: Box434
+    100010: Box435
+    100012: //RootNode
+    100014: Cylinder681
+    100016: Cylinder682
+    100018: Cylinder683
+    100020: Cylinder684
+    100022: Cylinder685
+    100024: Cylinder686
+    100026: Cylinder687
+    100028: Cylinder688
+    100030: Cylinder689
+    100032: Cylinder690
+    100034: Cylinder691
+    100036: Cylinder692
+    100038: Cylinder693
+    100040: Cylinder694
+    100042: Cylinder695
+    100044: Cylinder696
+    100046: Cylinder697
+    100048: Cylinder698
+    100050: Object424
+    100052: Object425
+    100054: Object426
+    100056: Object427
+    100058: Object428
+    100060: Object429
+    100062: Object430
+    100064: Object431
+    100066: Object432
+    400000: Box430
+    400002: Box431
+    400004: Box432
+    400006: Box433
+    400008: Box434
+    400010: Box435
+    400012: //RootNode
+    400014: Cylinder681
+    400016: Cylinder682
+    400018: Cylinder683
+    400020: Cylinder684
+    400022: Cylinder685
+    400024: Cylinder686
+    400026: Cylinder687
+    400028: Cylinder688
+    400030: Cylinder689
+    400032: Cylinder690
+    400034: Cylinder691
+    400036: Cylinder692
+    400038: Cylinder693
+    400040: Cylinder694
+    400042: Cylinder695
+    400044: Cylinder696
+    400046: Cylinder697
+    400048: Cylinder698
+    400050: Object424
+    400052: Object425
+    400054: Object426
+    400056: Object427
+    400058: Object428
+    400060: Object429
+    400062: Object430
+    400064: Object431
+    400066: Object432
+    2300000: Box430
+    2300002: Box431
+    2300004: Box432
+    2300006: Box433
+    2300008: Box434
+    2300010: Box435
+    2300012: Cylinder681
+    2300014: Cylinder682
+    2300016: Cylinder683
+    2300018: Cylinder684
+    2300020: Cylinder685
+    2300022: Cylinder686
+    2300024: Cylinder687
+    2300026: Cylinder688
+    2300028: Cylinder689
+    2300030: Cylinder690
+    2300032: Cylinder691
+    2300034: Cylinder692
+    2300036: Cylinder693
+    2300038: Cylinder694
+    2300040: Cylinder695
+    2300042: Cylinder696
+    2300044: Cylinder697
+    2300046: Cylinder698
+    2300048: Object424
+    2300050: Object425
+    2300052: Object426
+    2300054: Object427
+    2300056: Object428
+    2300058: Object429
+    2300060: Object430
+    2300062: Object431
+    2300064: Object432
+    3300000: Box430
+    3300002: Box431
+    3300004: Box432
+    3300006: Box433
+    3300008: Box434
+    3300010: Box435
+    3300012: Cylinder681
+    3300014: Cylinder682
+    3300016: Cylinder683
+    3300018: Cylinder684
+    3300020: Cylinder685
+    3300022: Cylinder686
+    3300024: Cylinder687
+    3300026: Cylinder688
+    3300028: Cylinder689
+    3300030: Cylinder690
+    3300032: Cylinder691
+    3300034: Cylinder692
+    3300036: Cylinder693
+    3300038: Cylinder694
+    3300040: Cylinder695
+    3300042: Cylinder696
+    3300044: Cylinder697
+    3300046: Cylinder698
+    3300048: Object424
+    3300050: Object425
+    3300052: Object426
+    3300054: Object427
+    3300056: Object428
+    3300058: Object429
+    3300060: Object430
+    3300062: Object431
+    3300064: Object432
+    4300000: Box430
+    4300002: Box431
+    4300004: Box432
+    4300006: Box433
+    4300008: Box434
+    4300010: Box435
+    4300012: Cylinder681
+    4300014: Cylinder682
+    4300016: Cylinder683
+    4300018: Cylinder684
+    4300020: Cylinder685
+    4300022: Cylinder686
+    4300024: Cylinder687
+    4300026: Cylinder688
+    4300028: Cylinder689
+    4300030: Cylinder690
+    4300032: Cylinder691
+    4300034: Cylinder692
+    4300036: Cylinder693
+    4300038: Cylinder694
+    4300040: Cylinder695
+    4300042: Cylinder696
+    4300044: Cylinder697
+    4300046: Cylinder698
+    4300048: Object424
+    4300050: Object425
+    4300052: Object426
+    4300054: Object427
+    4300056: Object428
+    4300058: Object429
+    4300060: Object430
+    4300062: Object431
+    4300064: Object432
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
