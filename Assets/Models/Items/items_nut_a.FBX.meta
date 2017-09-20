@@ -1,17 +1,16 @@
 fileFormatVersion: 2
-guid: 444228bc8770dee42b46fa4c75b8549d
-timeCreated: 1505883333
+guid: b5282e77b591bd84d9353254058119c0
+timeCreated: 1505893433
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: map_collision_a
     400000: //RootNode
-    400002: map_collision_a
-    2300000: map_collision_a
-    3300000: map_collision_a
-    4300000: map_collision_a
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cylinder681
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -76,7 +75,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
