@@ -18,7 +18,7 @@ public class ProceduralMeshgen : MonoBehaviour
 
     int NodeCount = 0;
 
-    int MaxNodeNumber = 500;
+    int MaxNodeNumber = 5000;
 
     private Vector3[] nodes;
     private Vector3 prevPos;
