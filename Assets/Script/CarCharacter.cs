@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class CarCharacter : MonoBehaviour {
 
+    public CarUpgradeData[] UpgradeData;
+
 	public string id;
 	public float latestElapsedTime;
+
+    public ProceduralMeshgen Painter;
+
+    int CurrentCarLevel = 0;
+    int ConsumedNut = 0;
 
 	public bool IsSimulated;
 
 	public Vector3 simulatedEndPos;
 	public Quaternion simulatedBodyEndRot;
+
+    public CarController Controller;
 
 	public Rigidbody Rb;
 
@@ -30,17 +39,56 @@ public class CarCharacter : MonoBehaviour {
 		prevForward = new Vector2(transform.forward.x, transform.forward.z);
 		currForward = new Vector2(transform.forward.x, transform.forward.z);
 		currRight = new Vector2 (transform.right.x, transform.right.z);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+        ApplyCarData();
+
+    }
+
+    void ConsumeNut() {
+
+        /* if car can't upgrade no more - dont! */
+        if (CurrentCarLevel >= UpgradeData.Length - 1)
+            return;
+
+        ConsumedNut++;
+        if (ConsumedNut >= UpgradeData[CurrentCarLevel].RequireNutCount)
+            UpgradeCar();
+    }
+
+    void UpgradeCar() {
+        CurrentCarLevel++;
+
+        ApplyCarData();
+    }
+
+    void ApplyCarData() {
+        Painter.DetachMesh();
+
+        float newScale = UpgradeData[CurrentCarLevel].CarSize;
+        transform.localScale = new Vector3(newScale, newScale, newScale);
+        Painter.Width = UpgradeData[CurrentCarLevel].PaintWidth;
+
+        Controller.MoveSpeed = UpgradeData[CurrentCarLevel].CarSpeed;
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        SourceNut nut = collision.gameObject.GetComponent<SourceNut>();
+        if (nut)
+        {
+            ConsumeNut();
+            nut.Consume();
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 
 		if (IsSimulated) {
 			Vector3 currPos = new Vector3(transform.position.x, 0f, transform.position.z);
 			transform.position = Vector3.SmoothDamp (currPos, simulatedEndPos, ref Velocity, positionSyncSpeed * Time.deltaTime);
 			transform.rotation = Quaternion.RotateTowards (transform.rotation, simulatedBodyEndRot, rotationSyncSpeed * Time.deltaTime);
 		}
-
 
 		// Animation of Car
 		currForward.x = transform.forward.x;

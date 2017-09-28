@@ -41,15 +41,37 @@ public class ProceduralMeshgen : MonoBehaviour
 
     void Start()
     {
-        Init();
+        ResetNodes();
     }
 
-    public void Init()
+    public void ResetNodes()
     {
         NodeCount = 0;
         prevPos = Source.transform.position;
 
         nodes = new Vector3[MaxNodeNumber];
+    }
+
+    public void DetachMesh() {
+        if (MeshObj) {
+            ResetNodes();
+
+            MeshObj.transform.parent = null;
+            CreateNewMesh();
+        }
+        
+    }
+
+    void CreateNewMesh() {
+        MeshObj = new GameObject();
+        MeshObj.AddComponent<MeshFilter>();
+        MeshObj.AddComponent<MeshRenderer>();
+        MeshObj.transform.parent = transform;
+        MeshObj.transform.position = new Vector3(0f, 0f, 0f);
+        MeshObj.transform.localScale = new Vector3(1f, 1f, 1f);
+        MeshObj.name = "ProceduralMesh";
+        Filter = MeshObj.GetComponent<MeshFilter>();
+        Filter.sharedMesh = new Mesh();
     }
 
     // Update is called once per frame
@@ -64,15 +86,7 @@ public class ProceduralMeshgen : MonoBehaviour
 
         if (!MeshObj)
         {
-            MeshObj = new GameObject();
-            MeshObj.AddComponent<MeshFilter>();
-            MeshObj.AddComponent<MeshRenderer>();
-            MeshObj.transform.parent = transform;
-            MeshObj.transform.position = new Vector3(0f, 0f, 0f);
-            MeshObj.transform.localScale = new Vector3(1f, 1f, 1f);
-            MeshObj.name = "ProceduralMesh";
-            Filter = MeshObj.GetComponent<MeshFilter>();
-            Filter.sharedMesh = new Mesh();
+            CreateNewMesh();
         }
         else if (MeshObj && !Filter)
         {
