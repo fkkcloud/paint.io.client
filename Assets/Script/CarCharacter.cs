@@ -19,7 +19,7 @@ public class CarCharacter : MonoBehaviour {
 	public Vector3 simulatedEndPos;
 	public Quaternion simulatedBodyEndRot;
 
-    public CarController Controller;
+    public Controller CharacterController;
 
 	public Rigidbody Rb;
 
@@ -68,7 +68,7 @@ public class CarCharacter : MonoBehaviour {
         transform.localScale = new Vector3(newScale, newScale, newScale);
         Painter.Width = UpgradeData[CurrentCarLevel].PaintWidth;
 
-        Controller.MoveSpeed = UpgradeData[CurrentCarLevel].CarSpeed;
+        CharacterController.MoveSpeed = UpgradeData[CurrentCarLevel].CarSpeed;
     }
 
     void OnTriggerEnter(Collider collision)
@@ -90,7 +90,13 @@ public class CarCharacter : MonoBehaviour {
 			transform.rotation = Quaternion.RotateTowards (transform.rotation, simulatedBodyEndRot, rotationSyncSpeed * Time.deltaTime);
 		}
 
-		// Animation of Car
+        // Lock Y
+        Vector3 pos = transform.position;
+        pos.y = 0f;
+        transform.position = pos;
+		
+            
+            // Animation of Car
 		currForward.x = transform.forward.x;
 		currForward.y = transform.forward.z;
 		if (currForward != prevForward) {

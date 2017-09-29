@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarController : IOBehavior {
+public class CarController : Controller {
 
 	public UserControl UserInputControl;
 
@@ -12,7 +12,6 @@ public class CarController : IOBehavior {
 	float PacketLimit = 35.0f / 1000f;
 
 	public float Sensitivity = 1f;
-	public float MoveSpeed = 1f;
 
 	// Use this for initialization
 	void Start () {
