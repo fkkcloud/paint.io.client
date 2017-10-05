@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 62c4410d09a9b9948a078e6b04d87b35
-timeCreated: 1507174131
+guid: b1d6f0666d4f37641bb5320a8dbedd69
+timeCreated: 1507174129
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: map_collision_a
+    4300000: collision_ground_a
     9500000: //RootNode
   materials:
     importMaterials: 1
