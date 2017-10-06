@@ -95,8 +95,7 @@ public class CarCharacter : MonoBehaviour {
         pos.y = 0f;
         transform.position = pos;
 		
-            
-            // Animation of Car
+        // Animation of Car
 		currForward.x = transform.forward.x;
 		currForward.y = transform.forward.z;
 		if (currForward != prevForward) {
@@ -109,7 +108,6 @@ public class CarCharacter : MonoBehaviour {
 			currRight.y = transform.right.z;
 			float dot2 = Vector2.Dot (prevForward, currRight);
 
-			
 			Vector3 newBodyRotation = transform.rotation.eulerAngles + new Vector3 (0f, 0f, dot2 * dot * RotateAmount);
 			transform.rotation = Quaternion.Euler (newBodyRotation);
 

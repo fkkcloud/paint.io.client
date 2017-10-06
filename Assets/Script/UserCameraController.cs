@@ -6,26 +6,20 @@ public class UserCameraController : IOBehavior {
 
 	public GameObject CameraTarget;
 
-	private Vector3 destination;
+	private Vector3 diffVector;
 	private Vector3 targetDestination;
-	private Vector3 currentDestination;
-
-	public float DistFromCharacter = 2f;
-	public float HeightFromGround = 3f;
-	public float LookAtHeightOffset = 2f;
-
-	Vector3 HeightFromGroundVector;
+	//private Vector3 currentDestination;
 
 	[HideInInspector]
 	public Vector3 CamVelocity = Vector3.zero;
 
-	[HideInInspector]
-	public Vector3 CamRotVelocity = Vector3.zero;
+	//[HideInInspector]
+	//public Vector3 CamRotVelocity = Vector3.zero;
 
-	public float dampTime = 0.15f;
+	public float smoothTime = 0.15f;
 
 	void Start(){
-		HeightFromGroundVector = new Vector3 (0f, HeightFromGround, 0f);
+        diffVector = CameraTarget.transform.position - transform.position;
 	}
 
 	public void Setup(GameObject target)
@@ -40,13 +34,13 @@ public class UserCameraController : IOBehavior {
 
 		if (CameraTarget) {
 
-			destination = CameraTarget.transform.position + CameraTarget.transform.forward * -DistFromCharacter + HeightFromGroundVector;
-			transform.position = Vector3.SmoothDamp (transform.position, destination, ref CamVelocity, dampTime);
+            targetDestination = CameraTarget.transform.position - diffVector;
+			transform.position = Vector3.SmoothDamp (transform.position, targetDestination, ref CamVelocity, smoothTime);
 
-			targetDestination = CameraTarget.transform.position + new Vector3 (0f, LookAtHeightOffset, 0f);
-			currentDestination = Vector3.SmoothDamp (currentDestination, targetDestination, ref CamRotVelocity, dampTime);
+			//targetDestination = CameraTarget.transform.position + new Vector3 (0f, LookAtHeightOffset, 0f);
+			//currentDestination = Vector3.SmoothDamp (currentDestination, targetDestination, ref CamRotVelocity, dampTime);
 
-			transform.LookAt (currentDestination);
+			//transform.LookAt (currentDestination);
 		}
 	}
 
