@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CarController : Controller {
 
-	public UserControl UserInputControl;
+	public Joystick UserInputControl;
 
 	public CarCharacter CharacterObject;
 
@@ -31,7 +31,7 @@ public class CarController : Controller {
 			// default when there is no position input from player
 
 			Vector3 newBodyRotation = CharacterObject.transform.rotation.eulerAngles; 
-			float yaw = UserInputControl.Horizontal ();
+			float yaw = UserInputControl.Yaw ();
 			if (yaw != 0f) {
 				// reminder - Euler(pitch , yaw , roll)
 				newBodyRotation = CharacterObject.transform.rotation.eulerAngles + new Vector3 (0f, yaw * Sensitivity * Time.deltaTime, 0f);
