@@ -37,7 +37,7 @@ public class BoostBtn : MonoBehaviour {
         }, 1f, BoostSpeed, BoostDuration).setLoopPingPong(1).setOnComplete(() =>
         {
             Invoke("EnableBoost", AdditionalBoostDelay);
-        }).setEaseOutCubic();
+        }).setEaseOutExpo();
 
     }
 

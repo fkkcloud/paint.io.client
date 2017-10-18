@@ -28,8 +28,7 @@ public class CarController : Controller {
 
 	void UpdateInput(){
 
-		if (UserInputControl && CharacterObject) 
-		{
+
 			// rotation //------------------------------------------------------------
 			// default when there is no position input from player
 
@@ -43,7 +42,7 @@ public class CarController : Controller {
 			}
 
 			Vector3 newPosition = CharacterObject.transform.position;
-			CharacterObject.Rb.MovePosition (CharacterObject.Rb.position +
+			CharacterObject.Rb.MovePosition (CharacterObject.transform.position +
 				CharacterObject.transform.forward * MoveSpeed * Time.deltaTime * BoostValue);
 
 			newPosition = CharacterObject.transform.position;
@@ -58,6 +57,5 @@ public class CarController : Controller {
 
 				PacketTimer = 0f;
 			}
-		}
 	}
 }
