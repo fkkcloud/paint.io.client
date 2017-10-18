@@ -32,6 +32,9 @@ public class Joystick : IOBehavior, IDragHandler, IPointerUpHandler, IPointerDow
         joystickImg = transform.GetChild(0).GetComponent<Image>();
         rotateIndicator = transform.GetChild(1).GetComponent<Image>();
         originalJoystickPos = joystickImg.rectTransform.anchoredPosition;
+
+        rotateIndicator.rectTransform.rotation = Quaternion.Euler(0f, 0f, Camera.main.transform.rotation.eulerAngles.y - CarTransform.rotation.eulerAngles.y);
+
     }
 
     public virtual void OnDrag(PointerEventData ped)
@@ -65,7 +68,7 @@ public class Joystick : IOBehavior, IDragHandler, IPointerUpHandler, IPointerDow
                 draggedPos.y,
                 originalJoystickPos.z);
 
-            rotateIndicator.rectTransform.rotation = Quaternion.Euler(0f, 0f, -CarTransform.rotation.eulerAngles.y);
+            rotateIndicator.rectTransform.rotation = Quaternion.Euler(0f, 0f, Camera.main.transform.rotation.eulerAngles.y - CarTransform.rotation.eulerAngles.y);
             PreviousDragPosition = draggedPos;
 
 

@@ -8,7 +8,10 @@ public class CarController : Controller {
 
 	public CarCharacter CharacterObject;
 
-	float PacketTimer = 0f;
+    [HideInInspector]
+    public float BoostValue = 1.0f;
+
+    float PacketTimer = 0f;
 	float PacketLimit = 35.0f / 1000f;
 
 	public float Sensitivity = 1f;
@@ -41,7 +44,7 @@ public class CarController : Controller {
 
 			Vector3 newPosition = CharacterObject.transform.position;
 			CharacterObject.Rb.MovePosition (CharacterObject.Rb.position +
-				CharacterObject.transform.forward * MoveSpeed * Time.deltaTime);
+				CharacterObject.transform.forward * MoveSpeed * Time.deltaTime * BoostValue);
 
 			newPosition = CharacterObject.transform.position;
 
