@@ -21,8 +21,15 @@ public class BoostBtn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+        /*
+         * Debug purposes
+         * */
+        if (btn.interactable && Input.GetKeyDown(KeyCode.M))
+            Boost();
+
+
+    }
 
     void EnableBoost() {
         btn.interactable = true;
