@@ -1,21 +1,17 @@
 fileFormatVersion: 2
-guid: b1d6f0666d4f37641bb5320a8dbedd69
-timeCreated: 1507174129
-licenseType: Pro
+guid: b77e2946d89735541bdac965f09f530b
+timeCreated: 1508659009
+licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: gameplay_collision_ground_1
-    400000: //RootNode
-    400002: gameplay_collision_ground_1
-    2300000: //RootNode
-    2300002: gameplay_collision_ground_1
-    3300000: //RootNode
-    3300002: gameplay_collision_ground_1
+    100000: collision_ground_a
+    100002: //RootNode
+    400000: collision_ground_a
+    400002: //RootNode
+    2300000: collision_ground_a
+    3300000: collision_ground_a
     4300000: collision_ground_a
-    4300002: gameplay_collision_ground_1
-    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -80,7 +76,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
