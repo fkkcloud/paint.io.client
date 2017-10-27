@@ -14,8 +14,6 @@ public class ProceduralMeshgen : MonoBehaviour
 
     public GameObject Source;
 
-    public float UVScale = 0.5f;
-
     int NodeCount = 0;
 
     int MaxNodeNumber = 5000;
@@ -55,16 +53,43 @@ public class ProceduralMeshgen : MonoBehaviour
     /* 
      * save last position and set it as first node on new mesh nodes
      * detaching the old sized mesh and create new mesh
+     * try to put at least 4 of them
      */
     public void DetachMesh() {
-        if (MeshObj) {
-            Vector3 lastPosition = nodes[NodeCount-1];
-            Vector3 lastPosition2 = nodes[NodeCount - 2];
+
+        if (MeshObj)
+        {
+            Vector3 lastPosition = Vector3.zero;
+            if (NodeCount > 0)
+                lastPosition = nodes[NodeCount - 1];
+            Vector3 lastPosition2 = Vector3.zero;
+            if (NodeCount > 1)
+                lastPosition2 = nodes[NodeCount - 2];
+            Vector3 lastPosition3 = Vector3.zero;
+            if (NodeCount > 2)
+                lastPosition3 = nodes[NodeCount - 3];
+            Vector3 lastPosition4 = Vector3.zero;
+            if (NodeCount > 3)
+                lastPosition4 = nodes[NodeCount - 3];
+
             ResetNodes();
-            nodes[0] = lastPosition;
-            NodeCount++;
-            nodes[1] = lastPosition2;
-            NodeCount++;
+
+            if (lastPosition != Vector3.zero) {
+                nodes[0] = lastPosition;
+                NodeCount++;
+            }
+            if (lastPosition2 != Vector3.zero) {
+                nodes[1] = lastPosition2;
+                NodeCount++;
+            }
+            if (lastPosition3 != Vector3.zero) {
+                nodes[2] = lastPosition3;
+                NodeCount++;
+            }
+            if (lastPosition4 != Vector3.zero) {
+                nodes[3] = lastPosition4;
+                NodeCount++;
+            }
 
             MeshObj.transform.parent = null;
             CreateNewMesh();
@@ -140,11 +165,11 @@ public class ProceduralMeshgen : MonoBehaviour
         CrossVectors[0] = r;
         CrossVectors[1] = l;
 
-        accumulatedDist += currentDist * UVScale;
+        accumulatedDist += currentDist;
         if (accumulatedDist > 1f)
         {
             accumulatedDist = 0;
-            accumulatedDist += currentDist * UVScale;
+            accumulatedDist += currentDist;
         }
     }
 
