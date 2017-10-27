@@ -10,6 +10,9 @@ public class GameState : IOBehavior {
 
 	public GameObject CarPrefab;
 
+    public Joystick PlayerJoystick;
+    public BoostBtn PlayerBoostBtn;
+
 	public List<CarCharacter> cars = new List<CarCharacter>();
 
 	// Use this for initialization
@@ -17,7 +20,20 @@ public class GameState : IOBehavior {
 		Application.runInBackground = true;
 		Application.targetFrameRate = 30;
 		SetupNetworks ();
-	}
+    }
+
+    public void CreateCarLocalGameCar(Vector3 pos) {
+
+        GameObject go = Instantiate(CarPrefab, pos, Quaternion.identity);
+        CarController control = go.GetComponent<CarController>();
+
+        control.UserInputControl = PlayerJoystick;
+        PlayerJoystick.CarControl = control;
+        PlayerBoostBtn.CarControl = control;
+
+        GlobalCam.Reset(pos);
+        GlobalCam.CameraTarget = control.CharacterObject.gameObject;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -58,7 +74,6 @@ public class GameState : IOBehavior {
 		bool isSimulated = true;
 
 		Debug.Log ("Create other car");
-
 		CarCharacter car = CreateCar (evt, isSimulated, CarPrefab);
 
 		//car.Rb.isKinematic = true;

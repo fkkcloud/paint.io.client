@@ -29,4 +29,16 @@ public class IOBehavior : MonoBehaviour {
 		}
 	}
 
+    private UserCameraController _userCam;
+    public UserCameraController GlobalCam
+    {
+        get
+        {
+            if (_userCam == null)
+                _userCam = FindObjectOfType<UserCameraController>();
+
+            return _userCam;
+        }
+    }
+
 }

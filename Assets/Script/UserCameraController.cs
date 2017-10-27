@@ -8,7 +8,10 @@ public class UserCameraController : IOBehavior {
 
 	private Vector3 diffVector;
 	private Vector3 targetDestination;
-	//private Vector3 currentDestination;
+    //private Vector3 currentDestination;
+
+    Vector3 originalPos;
+    Quaternion originalRot;
 
 	[HideInInspector]
 	public Vector3 CamVelocity = Vector3.zero;
@@ -19,8 +22,15 @@ public class UserCameraController : IOBehavior {
 	public float smoothTime = 0.15f;
 
 	void Start(){
+        originalPos = transform.position;
+        originalRot = transform.rotation;
         diffVector = CameraTarget.transform.position - transform.position;
 	}
+
+    public void Reset(Vector3 resetPos) {
+        transform.position = resetPos + originalPos;
+        transform.rotation = originalRot;
+    }
 
 	public void Setup(GameObject target)
 	{

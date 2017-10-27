@@ -15,7 +15,7 @@ public class Joystick : IOBehavior, IDragHandler, IPointerUpHandler, IPointerDow
     private Vector2 DragStartPosition;
     private Vector2 PreviousDragPosition;
 
-    public Transform CarTransform;
+    public CarController CarControl;
 
     [HideInInspector]
     public Vector3 BaseBodyRotation;
@@ -33,8 +33,7 @@ public class Joystick : IOBehavior, IDragHandler, IPointerUpHandler, IPointerDow
         rotateIndicator = transform.GetChild(1).GetComponent<Image>();
         originalJoystickPos = joystickImg.rectTransform.anchoredPosition;
 
-        rotateIndicator.rectTransform.rotation = Quaternion.Euler(0f, 0f, Camera.main.transform.rotation.eulerAngles.y - CarTransform.rotation.eulerAngles.y);
-
+        rotateIndicator.rectTransform.rotation = Quaternion.Euler(0f, 0f, Camera.main.transform.rotation.eulerAngles.y - CarControl.CharacterObject.gameObject.transform.rotation.eulerAngles.y);
     }
 
     public virtual void OnDrag(PointerEventData ped)
@@ -68,7 +67,7 @@ public class Joystick : IOBehavior, IDragHandler, IPointerUpHandler, IPointerDow
                 draggedPos.y,
                 originalJoystickPos.z);
 
-            rotateIndicator.rectTransform.rotation = Quaternion.Euler(0f, 0f, Camera.main.transform.rotation.eulerAngles.y - CarTransform.rotation.eulerAngles.y);
+            rotateIndicator.rectTransform.rotation = Quaternion.Euler(0f, 0f, Camera.main.transform.rotation.eulerAngles.y - CarControl.CharacterObject.transform.rotation.eulerAngles.y);
             PreviousDragPosition = draggedPos;
 
 
@@ -85,7 +84,7 @@ public class Joystick : IOBehavior, IDragHandler, IPointerUpHandler, IPointerDow
             , out pointerDownPos))
         {
             DragStartPosition = pointerDownPos;
-            BaseBodyRotation = CarTransform.rotation.eulerAngles;
+            BaseBodyRotation = CarControl.CharacterObject.transform.rotation.eulerAngles;
 
             joystickImg.color = new Color(joystickImg.color.r, joystickImg.color.g, joystickImg.color.b, 0.25f);
             //Debug.Log ("PointerDown:" + BaseScreenPosition);

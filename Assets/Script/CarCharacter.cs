@@ -59,8 +59,10 @@ public class CarCharacter : MonoBehaviour {
         CurrentCarLevel++;
 
 #if UNITY_EDITOR
+        if (CurrentCarLevel > UpgradeData.Length - 1)
+            return;
         // only for cheating purposes / editor use only
-        if (CurrentCarLevel < UpgradeData.Length && ConsumedNut < UpgradeData[CurrentCarLevel].RequireNutCount)
+        if (ConsumedNut < UpgradeData[CurrentCarLevel].RequireNutCount)
             ConsumedNut = UpgradeData[CurrentCarLevel].RequireNutCount;
 #endif
 

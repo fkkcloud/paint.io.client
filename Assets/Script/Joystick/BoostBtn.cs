@@ -9,7 +9,7 @@ public class BoostBtn : MonoBehaviour {
     public float AdditionalBoostDelay = 3f;
     public float BoostDuration = 1f;
     public float BoostSpeed = 2f;
-    public CarController CarChar;
+    public CarController CarControl;
 
     public Button btn;
 
@@ -40,7 +40,7 @@ public class BoostBtn : MonoBehaviour {
 
         LeanTween.value(gameObject, (value) =>
         {
-            CarChar.BoostValue = value;
+            CarControl.BoostValue = value;
         }, 1f, BoostSpeed, BoostDuration).setLoopPingPong(1).setOnComplete(() =>
         {
             Invoke("EnableBoost", AdditionalBoostDelay);
