@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CarCollision : MonoBehaviour {
 
-    public float CollisionVelocity = 3f;
+    float collisionVelocity = 0.2f;
+    float limitDotAngle = -0.1f;
+    public Controller Control;
 
 	// Use this for initialization
 	void Start () {
@@ -18,20 +20,25 @@ public class CarCollision : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-
+        
         if (!collision.gameObject.GetComponent<GameplayBlockCollision>())
             return;
+            
 
-        foreach (ContactPoint contact in collision.contacts)
+        //Debug.Log("Contact Point:" + Vector3.Dot(collision.contacts[0].normal, transform.forward));
+        //Debug.Log("Collision Velocity:" + collision.relativeVelocity.magnitude);
+        if (collision.relativeVelocity.magnitude > collisionVelocity && 
+            Vector3.Dot(collision.contacts[0].normal, transform.forward) < limitDotAngle)
         {
-            Debug.DrawRay(contact.point, contact.normal, Color.white);
-            Debug.Log("Contact Point:" + Vector3.Dot(contact.normal, transform.forward));
-        }
+            //Debug.Log("Collide!!!!");
+            Control.Bumping = true;
+            Invoke("StopBumping", 0.1f);
 
-        Debug.Log("Collision Velocity:" + collision.relativeVelocity.magnitude);
-        if (collision.relativeVelocity.magnitude > CollisionVelocity)
-        {
-            Debug.Log("Collide!!!!");
+            Control.CharacterObject.DowngradeCar();
         }
+    }
+
+    void StopBumping() {
+        Control.Bumping = false;
     }
 }

@@ -55,6 +55,16 @@ public class CarCharacter : MonoBehaviour {
             UpgradeCar();
     }
 
+    public void DowngradeCar() {
+
+        if (CurrentCarLevel == 0)
+            return;
+
+        CurrentCarLevel--;
+
+        ApplyCarData();
+    }
+
     void UpgradeCar() {
         CurrentCarLevel++;
 

@@ -6,20 +6,20 @@ public class CarController : Controller {
 
 	public Joystick UserInputControl;
 
-	public CarCharacter CharacterObject;
-
-    Vector3 CurrentVelocity;
-
     [HideInInspector]
     public float BoostValue = 1.0f;
 
     float PacketTimer = 0f;
 	float PacketLimit = 35.0f / 1000f;
 
+    float CarCollisionBounceDist = 0.6f;
+
 	public float RotationSensitivity = 200f;
 
-	// Use this for initialization
-	void Start () {
+    Vector3 refRot;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -28,7 +28,7 @@ public class CarController : Controller {
 		UpdateInput ();
 	}
 
-	void UpdateInput(){
+    void UpdateInput(){
 
 		// rotation //------------------------------------------------------------
 		// default when there is no position input from player
@@ -48,9 +48,20 @@ public class CarController : Controller {
 		}
 
 		Vector3 newPosition = CharacterObject.transform.position;
-        Vector3 targetPosition = CharacterObject.transform.position + CharacterObject.transform.forward * MoveSpeed * BoostValue;
-        CharacterObject.transform.position = Vector3.SmoothDamp(CharacterObject.transform.position, targetPosition, ref CurrentVelocity, 0.3f);
+        Vector3 targetPosition = newPosition;
+        float smoothTime = 0.3f;
+        if (Bumping)
+        {
+            smoothTime = 0.038f;
+            
+            CharacterObject.transform.rotation = Quaternion.Euler( Vector3.SmoothDamp(CharacterObject.transform.rotation.eulerAngles, CharacterObject.transform.rotation.eulerAngles + new Vector3(0f, Random.Range(-45f, 45f), 0f), ref refRot, 0.02f) );
+            targetPosition = CharacterObject.transform.position + -CharacterObject.transform.forward * CarCollisionBounceDist;
+        }
+        else {
+            targetPosition = CharacterObject.transform.position + CharacterObject.transform.forward * MoveSpeed * BoostValue;
+        }
 
+        CharacterObject.transform.position = Vector3.SmoothDamp(CharacterObject.transform.position, targetPosition, ref CurrentVelocity, smoothTime);
         newPosition = CharacterObject.transform.position;
 
 		// network //------------------------------------------------------------

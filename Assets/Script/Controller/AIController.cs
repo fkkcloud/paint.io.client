@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class AIController : Controller {
 
-    public CarCharacter CharacterObject;
 
     public float Sensitivity = 1f;
 
@@ -38,7 +37,21 @@ public class AIController : Controller {
     {
         agent.speed = MoveSpeed;
 
-        if (Vector3.Distance(transform.position, CurrentDestination) < 1f)
+        Vector3 newPosition = CharacterObject.transform.position;
+        Vector3 targetPosition = newPosition;
+        
+        float smoothTime = 0.3f;
+        if (Bumping)
+        {
+            agent.speed = 0f;
+            smoothTime = .1f;
+            targetPosition = CharacterObject.transform.position + -CharacterObject.transform.forward * 0.3f;
+        }
+
+        CharacterObject.transform.position = Vector3.SmoothDamp(CharacterObject.transform.position, targetPosition, ref CurrentVelocity, smoothTime);
+        newPosition = CharacterObject.transform.position;
+
+        if (Vector3.Distance(transform.position, CurrentDestination) < 0.5f)
         {
             CancelInvoke("SetAIDestination");
             SetAIDestination();
