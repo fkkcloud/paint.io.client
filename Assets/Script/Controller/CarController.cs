@@ -8,13 +8,15 @@ public class CarController : Controller {
 
 	public CarCharacter CharacterObject;
 
+    Vector3 CurrentVelocity;
+
     [HideInInspector]
     public float BoostValue = 1.0f;
 
     float PacketTimer = 0f;
 	float PacketLimit = 35.0f / 1000f;
 
-	public float Sensitivity = 1f;
+	public float RotationSensitivity = 200f;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +24,7 @@ public class CarController : Controller {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		UpdateInput ();
 	}
 
@@ -34,23 +36,22 @@ public class CarController : Controller {
 		Vector3 newBodyRotation = CharacterObject.transform.rotation.eulerAngles; 
 		float yaw = UserInputControl.Yaw ();
 
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
         // debug purpose
         yaw = Input.GetAxis("Horizontal");
-#endif
+//#endif
 
         if (yaw != 0f) {
 			// reminder - Euler(pitch , yaw , roll)
-			newBodyRotation = CharacterObject.transform.rotation.eulerAngles + new Vector3 (0f, yaw * Sensitivity * Time.deltaTime, 0f);
-
+			newBodyRotation = CharacterObject.transform.rotation.eulerAngles + new Vector3 (0f, yaw * RotationSensitivity * Time.deltaTime, 0f);
 			CharacterObject.transform.rotation = Quaternion.Euler (newBodyRotation);
 		}
 
 		Vector3 newPosition = CharacterObject.transform.position;
-		CharacterObject.Rb.MovePosition (CharacterObject.transform.position +
-			CharacterObject.transform.forward * MoveSpeed * Time.deltaTime * BoostValue);
+        Vector3 targetPosition = CharacterObject.transform.position + CharacterObject.transform.forward * MoveSpeed * BoostValue;
+        CharacterObject.transform.position = Vector3.SmoothDamp(CharacterObject.transform.position, targetPosition, ref CurrentVelocity, 0.3f);
 
-		newPosition = CharacterObject.transform.position;
+        newPosition = CharacterObject.transform.position;
 
 		// network //------------------------------------------------------------
 		PacketTimer += Time.deltaTime;

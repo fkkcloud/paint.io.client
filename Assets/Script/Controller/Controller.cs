@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Controller : IOBehavior
 {
+    [HideInInspector]
     public float MoveSpeed;
 
 }
