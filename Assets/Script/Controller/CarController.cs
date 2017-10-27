@@ -28,34 +28,39 @@ public class CarController : Controller {
 
 	void UpdateInput(){
 
+		// rotation //------------------------------------------------------------
+		// default when there is no position input from player
 
-			// rotation //------------------------------------------------------------
-			// default when there is no position input from player
+		Vector3 newBodyRotation = CharacterObject.transform.rotation.eulerAngles; 
+		float yaw = UserInputControl.Yaw ();
 
-			Vector3 newBodyRotation = CharacterObject.transform.rotation.eulerAngles; 
-			float yaw = UserInputControl.Yaw ();
-			if (yaw != 0f) {
-				// reminder - Euler(pitch , yaw , roll)
-				newBodyRotation = CharacterObject.transform.rotation.eulerAngles + new Vector3 (0f, yaw * Sensitivity * Time.deltaTime, 0f);
+#if UNITY_EDITOR
+        // debug purpose
+        yaw = Input.GetAxis("Horizontal");
+#endif
 
-				CharacterObject.transform.rotation = Quaternion.Euler (newBodyRotation);
-			}
+        if (yaw != 0f) {
+			// reminder - Euler(pitch , yaw , roll)
+			newBodyRotation = CharacterObject.transform.rotation.eulerAngles + new Vector3 (0f, yaw * Sensitivity * Time.deltaTime, 0f);
 
-			Vector3 newPosition = CharacterObject.transform.position;
-			CharacterObject.Rb.MovePosition (CharacterObject.transform.position +
-				CharacterObject.transform.forward * MoveSpeed * Time.deltaTime * BoostValue);
+			CharacterObject.transform.rotation = Quaternion.Euler (newBodyRotation);
+		}
 
-			newPosition = CharacterObject.transform.position;
+		Vector3 newPosition = CharacterObject.transform.position;
+		CharacterObject.Rb.MovePosition (CharacterObject.transform.position +
+			CharacterObject.transform.forward * MoveSpeed * Time.deltaTime * BoostValue);
 
-			// network //------------------------------------------------------------
-			PacketTimer += Time.deltaTime;
-			if (PacketTimer > PacketLimit) {
-				Dictionary<string, string> data = new Dictionary<string, string> ();
-				data ["transform"] = newPosition.x + "," + newPosition.z + "," + newBodyRotation.y;
-				data ["elapsedTime"] = Time.timeSinceLevelLoad.ToString();
-				SocketIOComp.Emit("SERVER:MOVE", new JSONObject(data));
+		newPosition = CharacterObject.transform.position;
 
-				PacketTimer = 0f;
-			}
+		// network //------------------------------------------------------------
+		PacketTimer += Time.deltaTime;
+		if (PacketTimer > PacketLimit) {
+			Dictionary<string, string> data = new Dictionary<string, string> ();
+			data ["transform"] = newPosition.x + "," + newPosition.z + "," + newBodyRotation.y;
+			data ["elapsedTime"] = Time.timeSinceLevelLoad.ToString();
+			SocketIOComp.Emit("SERVER:MOVE", new JSONObject(data));
+
+			PacketTimer = 0f;
+		}
 	}
 }

@@ -58,6 +58,12 @@ public class CarCharacter : MonoBehaviour {
     void UpgradeCar() {
         CurrentCarLevel++;
 
+#if UNITY_EDITOR
+        // only for cheating purposes / editor use only
+        if (CurrentCarLevel < UpgradeData.Length && ConsumedNut < UpgradeData[CurrentCarLevel].RequireNutCount)
+            ConsumedNut = UpgradeData[CurrentCarLevel].RequireNutCount;
+#endif
+
         ApplyCarData();
     }
 
@@ -84,7 +90,12 @@ public class CarCharacter : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-		if (IsSimulated) {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.U))
+            UpgradeCar();
+#endif
+
+        if (IsSimulated) {
 			Vector3 currPos = new Vector3(transform.position.x, 0f, transform.position.z);
 			transform.position = Vector3.SmoothDamp (currPos, simulatedEndPos, ref Velocity, positionSyncSpeed * Time.deltaTime);
 			transform.rotation = Quaternion.RotateTowards (transform.rotation, simulatedBodyEndRot, rotationSyncSpeed * Time.deltaTime);

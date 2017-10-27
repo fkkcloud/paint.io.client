@@ -52,9 +52,19 @@ public class ProceduralMeshgen : MonoBehaviour
         nodes = new Vector3[MaxNodeNumber];
     }
 
+    /* 
+     * save last position and set it as first node on new mesh nodes
+     * detaching the old sized mesh and create new mesh
+     */
     public void DetachMesh() {
         if (MeshObj) {
+            Vector3 lastPosition = nodes[NodeCount-1];
+            Vector3 lastPosition2 = nodes[NodeCount - 2];
             ResetNodes();
+            nodes[0] = lastPosition;
+            NodeCount++;
+            nodes[1] = lastPosition2;
+            NodeCount++;
 
             MeshObj.transform.parent = null;
             CreateNewMesh();
