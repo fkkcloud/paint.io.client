@@ -12,7 +12,6 @@ public class AIController : Controller {
 
     Vector3 CurrentDestination;
 
-    public GameObject CenterAnchor;
     public float Radius;
 
     void Start() {
@@ -22,7 +21,7 @@ public class AIController : Controller {
     }
 
     void SetAIDestination() {
-        Vector3 randomDirection = Random.insideUnitSphere * Radius + CenterAnchor.gameObject.transform.position;
+        Vector3 randomDirection = Random.insideUnitSphere * Radius + Vector3.zero;
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDirection, out hit, Radius, 1);
         CurrentDestination = hit.position;
