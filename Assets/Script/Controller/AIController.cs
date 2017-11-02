@@ -45,7 +45,7 @@ public class AIController : Controller {
         {
             agent.speed = 0f;
             smoothTime = .1f;
-            targetPosition = CharacterObject.transform.position + -CharacterObject.transform.forward * 0.3f;
+            targetPosition = CharacterObject.transform.position + -CharacterObject.transform.forward * BumpRate;
         }
 
         CharacterObject.transform.position = Vector3.SmoothDamp(CharacterObject.transform.position, targetPosition, ref CurrentVelocity, smoothTime);

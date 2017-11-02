@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameplayBlockCollision : MonoBehaviour {  
+public class GameplayBlockCollision : MonoBehaviour {
+
+    public float bounceRate = 0.5f;
 
 	// Use this for initialization
 	void Start () {

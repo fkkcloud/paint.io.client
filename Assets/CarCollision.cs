@@ -20,8 +20,8 @@ public class CarCollision : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        
-        if (!collision.gameObject.GetComponent<GameplayBlockCollision>())
+        GameplayBlockCollision block = collision.gameObject.GetComponent<GameplayBlockCollision>();
+        if (!block)
             return;
             
 
@@ -31,6 +31,7 @@ public class CarCollision : MonoBehaviour {
             Vector3.Dot(collision.contacts[0].normal, transform.forward) < limitDotAngle)
         {
             //Debug.Log("Collide!!!!");
+            Control.BumpRate = block.bounceRate;
             Control.Bumping = true;
             Invoke("StopBumping", 0.1f);
 

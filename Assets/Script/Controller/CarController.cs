@@ -54,8 +54,8 @@ public class CarController : Controller {
         {
             smoothTime = 0.038f;
             
-            CharacterObject.transform.rotation = Quaternion.Euler( Vector3.SmoothDamp(CharacterObject.transform.rotation.eulerAngles, CharacterObject.transform.rotation.eulerAngles + new Vector3(0f, Random.Range(-45f, 45f), 0f), ref refRot, 0.02f) );
-            targetPosition = CharacterObject.transform.position + -CharacterObject.transform.forward * CarCollisionBounceDist;
+            CharacterObject.transform.rotation = Quaternion.Euler( Vector3.SmoothDamp(CharacterObject.transform.rotation.eulerAngles, CharacterObject.transform.rotation.eulerAngles + new Vector3(0f, Random.Range(-15f, 15f), 0f), ref refRot, 0.02f) );
+            targetPosition = CharacterObject.transform.position + -CharacterObject.transform.forward * CarCollisionBounceDist * BumpRate;
         }
         else {
             targetPosition = CharacterObject.transform.position + CharacterObject.transform.forward * MoveSpeed * BoostValue;
