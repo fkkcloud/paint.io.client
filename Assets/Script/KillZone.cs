@@ -16,9 +16,12 @@ public class KillZone : IOBehavior {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.transform.parent.gameObject.GetComponent<CarController>())
+        if (!GlobalGameState.IsPlayerDead && other.gameObject.transform.parent.gameObject.GetComponent<CarController>())
         {
+            GlobalGameState.IsPlayerDead = true;
+
             Destroy(other.gameObject.transform.parent.gameObject);
+
             GlobalGameState.CreateCarLocalGameCar(Vector3.zero); // 0,0,0 re spawn pos is default temp
         }
         

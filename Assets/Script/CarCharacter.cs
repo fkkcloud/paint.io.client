@@ -123,14 +123,14 @@ public class CarCharacter : MonoBehaviour {
 #endif
 
         if (IsSimulated) {
-			Vector3 currPos = new Vector3(transform.position.x, 0f, transform.position.z);
+            Vector3 currPos = transform.position; //new Vector3(transform.position.x, 0f, transform.position.z);
 			transform.position = Vector3.SmoothDamp (currPos, simulatedEndPos, ref Velocity, positionSyncSpeed * Time.deltaTime);
 			transform.rotation = Quaternion.RotateTowards (transform.rotation, simulatedBodyEndRot, rotationSyncSpeed * Time.deltaTime);
 		}
 
         // Lock Y
         Vector3 pos = transform.position;
-        pos.y = 0f;
+        //pos.y = 0f;
         transform.position = pos;
 		
         // Animation of Car

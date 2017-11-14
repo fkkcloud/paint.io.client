@@ -15,6 +15,8 @@ public class GameState : IOBehavior {
 
 	public List<CarCharacter> cars = new List<CarCharacter>();
 
+    public bool IsPlayerDead = false;
+
 	// Use this for initialization
 	void Start () {
 		Application.runInBackground = true;
@@ -33,6 +35,8 @@ public class GameState : IOBehavior {
 
         GlobalCam.Reset(pos);
         GlobalCam.CameraTarget = control.CharacterObject.gameObject;
+
+        GlobalGameState.IsPlayerDead = false;
     }
 	
 	// Update is called once per frame
