@@ -24,7 +24,6 @@ public class CarCollision : MonoBehaviour {
         if (!block)
             return;
             
-
         //Debug.Log("Contact Point:" + Vector3.Dot(collision.contacts[0].normal, transform.forward));
         //Debug.Log("Collision Velocity:" + collision.relativeVelocity.magnitude);
         if (collision.relativeVelocity.magnitude > collisionVelocity && 
@@ -35,8 +34,9 @@ public class CarCollision : MonoBehaviour {
             Control.Bumping = true;
             Invoke("StopBumping", 0.1f);
 
-            Control.CharacterObject.DowngradeCar();
         }
+
+        //Control.CharacterObject.DowngradeCar();
     }
 
     void StopBumping() {
