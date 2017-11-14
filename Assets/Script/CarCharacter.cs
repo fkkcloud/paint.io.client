@@ -23,6 +23,11 @@ public class CarCharacter : MonoBehaviour {
 
 	public Rigidbody Rb;
 
+    private float UpgradeDuration = 1.0f;
+
+    [HideInInspector]
+    public bool IsUpgrading = false;
+
 	Vector2 prevForward;
 	Vector2 currForward;
 	Vector2 currRight;
@@ -46,13 +51,20 @@ public class CarCharacter : MonoBehaviour {
 
     void ConsumeNut() {
 
-        /* if car can't upgrade no more - dont! */
-        if (CurrentCarLevel >= UpgradeData.Length - 1)
+        /* if car is upgrading or can't upgrade no more - dont! */
+        if (IsUpgrading || CurrentCarLevel >= UpgradeData.Length - 1)
             return;
 
+        IsUpgrading = true;
         ConsumedNut++;
         if (ConsumedNut >= UpgradeData[CurrentCarLevel].RequireNutCount)
             UpgradeCar();
+
+        Invoke("UpgradeCarDone", UpgradeDuration);
+    }
+
+    private void UpgradeCarDone() {
+        IsUpgrading = false;
     }
 
     public void DowngradeCar() {
@@ -91,6 +103,9 @@ public class CarCharacter : MonoBehaviour {
 
     void OnTriggerEnter(Collider collision)
     {
+        if (IsUpgrading)
+            return;
+
         SourceNut nut = collision.gameObject.GetComponent<SourceNut>();
         if (nut)
         {
